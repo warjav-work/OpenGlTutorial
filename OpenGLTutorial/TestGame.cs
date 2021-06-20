@@ -86,7 +86,7 @@ namespace OpenGLTutorial
             glBindBuffer(GL_ARRAY_BUFFER, 0);
             glBindVertexArray(0);
 
-            cam = new Camera2D(DisplayManager.WindowSize / 2f, 1f);
+            cam = new Camera2D(DisplayManager.WindowSize / 2f, 2.5f);
 
         }
         protected override void Update()
@@ -101,7 +101,14 @@ namespace OpenGLTutorial
 
             Vector2 position = new Vector2(400, 300);
             Vector2 scale = new Vector2(150, 100);
-            float rotation = Math.PI / 4f;
+            //float rotation = MathF.PI / 4f;
+            float rotation = MathF.Sin(GameTime.TotalElapsedSeconds) * MathF.PI * 2;
+
+            Matrix4x4 trans = Matrix4x4.CreateTranslation(position.X, position.Y, 0);
+            Matrix4x4 sca = Matrix4x4.CreateScale(scale.X, scale.Y, 1);
+            Matrix4x4 rot = Matrix4x4.CreateRotationZ(rotation);
+
+            shader.SetMatrix4x4("model", sca * rot * trans);
 
             shader.Use();
             shader.SetMatrix4x4("projection", cam.GetProjectionMatrix());

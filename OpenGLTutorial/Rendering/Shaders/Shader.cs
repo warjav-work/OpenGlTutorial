@@ -74,7 +74,7 @@ namespace OpenGLTutorial.Rendering.Shaders
         public void SetMatrix4x4(string uniformName, Matrix4x4 mat)
         {
             int location = glGetUniformLocation(ProgramID, uniformName);
-            glUniformMatrix2x4fv(location, 1, false, GetMatrix4x4Values(mat));
+            glUniformMatrix4fv(location, 1, false, GetMatrix4x4Values(mat));
         }
 
         private float[] GetMatrix4x4Values(Matrix4x4 m)
